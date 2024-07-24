@@ -1,0 +1,25 @@
+services:
+
+  web:
+
+
+  database:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: DB_PASSWORD
+      POSTGRES_USER: DB_USER
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    volumes:
+    - ./database:/var/lib/postgresql
+
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 1010:1010
