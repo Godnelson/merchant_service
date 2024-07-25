@@ -1,3 +1,4 @@
+import typia, { tags } from "typia";
 import { BaseValidator } from '../../base/baseValidator';
 import { ValidationResponse } from '../../common/types/validationResponse';
 import { Product } from '../product';
@@ -5,14 +6,22 @@ export class ProductValidator implements BaseValidator<Product>{
     constructor(){}
 
     validate(product: Product): ValidationResponse {
-        let valid = true
-        let errors:any[] = []
-
-        this.isAllRequiredFieldsFilled(product, {valid, errors})
-        return {valid, errors}
+        return {} as ValidationResponse
     }
 
-    isAllRequiredFieldsFilled(product: Product, response: ValidationResponse): void{
-        if(product.createdAt == null) response.valid = false; response.errors.push(Error("createdAt can't be null"))
-    }
+}
+
+interface IProduct{
+    id: string & tags.Format<"uuid">,
+    name: string & tags.MaxLength<255>,
+    price: number &
+    tags.Type<"float"> &
+    tags.ExclusiveMinimum<0.0>,
+    quantity: number &
+    tags.Type<"uint32"> &
+    tags.ExclusiveMinimum<0>,
+    ownerId: string & tags.Format<"uuid">,
+    createdAt: Date & tags.Format<"uuid">,
+    updatedAt?: Date | undefined & tags.Format<"uuid">,
+    deletedAt?: Date | undefined & tags.Format<"uuid">,
 }

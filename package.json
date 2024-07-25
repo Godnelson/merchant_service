@@ -11,9 +11,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "typia": "^6.5.4"
+    "typia": "^6.5.4",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@types/uuid": "^10.0.0",
     "ts-patch": "^3.2.1",
     "typescript": "^5.5.2"
   }
