@@ -2,15 +2,17 @@ import { OperationPayload } from "./common/types/operationPayload";
 import { BaseModel } from "./base/base";
 import { Product } from "./product/product";
 
-export class Profile extends BaseModel {
+export class Profile implements BaseModel {
     constructor(
-        base: BaseModel,
+        public id: string,
         public firstName: string,
         public lastName: string,
         public email: string,
-        public authId: string
-    ){
-        super(base.createdAt, base.id, base.updatedAt, base.deletedAt)
-    }
+        public authId: string,
+        public createdAt: Date,
+        public updatedAt?: Date | undefined,
+        public deletedAt?: Date | undefined,
+    ){}
+
 
 }
