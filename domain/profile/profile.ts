@@ -1,6 +1,6 @@
-import { OperationPayload } from "./common/types/operationPayload";
-import { BaseModel } from "./base/base";
-import { Product } from "./product/product";
+import { OperationPayload } from "../common/types/operationPayload";
+import { BaseModel } from "../base/base";
+import { Product } from "../product/product";
 
 export class Profile implements BaseModel {
     constructor(
