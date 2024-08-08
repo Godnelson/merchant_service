@@ -1,0 +1,31 @@
+services:
+
+  server:
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - ./database:/var/lib/postgresql
+    environment:
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_USER: ${PG_USER}
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    command: postgres -c listen_addresses='*'
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 80:8080
+    depends_on:
+      - database
